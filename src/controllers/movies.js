@@ -37,9 +37,8 @@ class MoviesController {
   // POST /movies
   async createMovie(req, res) {
     // req.body
-    console.log(req.body);
-    const newMovie = new Movie(req.body);
-    const saveMovie = await newMovie.save();
+    // const newMovie = new Movie(req.body);
+    const saveMovie = await Movie.create(req.body);
     res.status(201).json({
       message: "Create Movie Successfull",
       data: saveMovie,
