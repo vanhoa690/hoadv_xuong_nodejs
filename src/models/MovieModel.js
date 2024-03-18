@@ -7,6 +7,11 @@ const MovieSchema = new Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
     poster: {
       type: String,
     },
@@ -16,9 +21,12 @@ const MovieSchema = new Schema(
     cast: {
       type: String,
     },
-    genre: {
-      type: String,
+    genres: {
+      type: [Schema.Types.ObjectId],
+      ref: "Genre",
+      required: true,
     },
+
     runingTime: {
       type: Number,
     },

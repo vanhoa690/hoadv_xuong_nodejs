@@ -1,5 +1,6 @@
 import moviesRouter from "./movies.js";
 import categoriesRouter from "./categories.js";
+import genresRouter from "./genres.js";
 
 export default function routes(app) {
   app.get("/", (req, res) => {
@@ -8,4 +9,5 @@ export default function routes(app) {
 
   app.use("/movies", moviesRouter);
   app.use("/categories", categoriesRouter);
+  app.use("/genres", genresRouter);
 }
