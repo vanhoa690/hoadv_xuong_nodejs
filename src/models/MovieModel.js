@@ -16,8 +16,16 @@ const MovieSchema = new Schema(
     cast: {
       type: String,
     },
-    genre: {
-      type: String,
+    // genres: ["65f7ec13b7b6e142083266b9", "65f7ec13b7b6e142083266b9"],
+    genres: {
+      type: [Schema.Types.ObjectId],
+      ref: "Genre",
+      require: true,
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
+      require: true,
     },
     runingTime: {
       type: Number,

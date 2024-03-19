@@ -4,7 +4,7 @@ class MoviesController {
   // GET /movies
   async getAllMovies(req, res) {
     try {
-      const movies = await Movie.find();
+      const movies = await Movie.find().populate(["category", "genres"]);
       res.status(200).json({
         message: "Get All Movies Done",
         data: movies,
@@ -18,7 +18,9 @@ class MoviesController {
   // GET /movies/:id
   async getMovieDetail(req, res) {
     try {
-      const movie = await Movie.findById(req.params.id);
+      const movie = await Movie.findById(req.params.id)
+        .populate("category")
+        .populate("genres");
       if (!movie) {
         return res.status(404).json({
           message: "Movie Not Found",
