@@ -1,20 +1,14 @@
 import express from "express";
+import CategoriesController from "../controllers/categories.js";
+
 const categoriesRouter = express.Router();
 
-categoriesRouter.get("/", (req, res) => {
-  res.send("categories");
-});
-categoriesRouter.post("/", (req, res) => {
-  res.send("categories");
-});
-categoriesRouter.get("/:id", (req, res) => {
-  res.send("categories");
-});
-categoriesRouter.put("/:id", (req, res) => {
-  res.send("categories");
-});
-categoriesRouter.delete("/:id", (req, res) => {
-  res.send("categories");
-});
+const categoriesController = new CategoriesController();
+
+categoriesRouter.get("/", categoriesController.getAllCategories);
+categoriesRouter.get("/:id", categoriesController.getCategoryDetail);
+categoriesRouter.post("/", categoriesController.creatCategory);
+categoriesRouter.put("/:id", categoriesController.updateCategory);
+categoriesRouter.delete("/:id", categoriesController.deleteCategory);
 
 export default categoriesRouter;
