@@ -1,5 +1,5 @@
 import Movie from "../models/MovieModel.js";
-
+import movieValidator from "../validations/movies.js";
 class MoviesController {
   // GET /movies
   async getAllMovies(req, res) {
@@ -36,11 +36,25 @@ class MoviesController {
   }
   // POST /movies
   async createMovie(req, res) {
-    const newMovie = await Movie.create(req.body);
-    res.status(201).json({
-      message: "Create Movie Successfull",
-      data: newMovie,
-    });
+    const { error } = movieValidator.validate(req.body);
+    if (error) {
+      console.log(error);
+      const errors = error.details.map((err) => err.message);
+      return res.status(400).json({
+        errors,
+      });
+    }
+    try {
+      const newMovie = await Movie.create(req.body);
+      res.status(201).json({
+        message: "Create Movie Successfull",
+        data: newMovie,
+      });
+    } catch (error) {
+      res.status(400).json({
+        message: error.message,
+      });
+    }
   }
   // PUT /movies/:id
   async updateMovie(req, res) {
