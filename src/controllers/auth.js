@@ -8,9 +8,7 @@ class AuthController {
     try {
       //B1: validate: email, password, username
       const { email, username, avatar, password } = req.body;
-      const { error } = registerValidate.validate(req.body, {
-        abortEarly: false,
-      });
+      const { error } = registerValidate.validate(req.body);
       if (error) {
         const errors = error.details.map((err) => err.message);
         return res.status(400).json({
@@ -31,6 +29,7 @@ class AuthController {
         avatar,
         password: hashPassword,
       });
+      // b4 remove password in res
       res.status(200).json({
         message: "Create Done",
         data: { ...user.toObject(), password: undefined },
