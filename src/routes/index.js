@@ -1,13 +1,16 @@
-import moviesRouter from "./movies.js";
-import categoriesRouter from "./categories.js";
-import genresRouter from "./genres.js";
+import { Router } from "express";
+import moviesRouter from "./movies";
+import categoriesRouter from "./categories";
+import genresRouter from "./genres";
 
-export default function routes(app) {
-  app.get("/", (req, res) => {
-    res.send("Home");
-  });
+const router = Router();
 
-  app.use("/movies", moviesRouter);
-  app.use("/categories", categoriesRouter);
-  app.use("/genres", genresRouter);
-}
+router.get("/", (req, res) => {
+  res.send("Home");
+});
+
+router.use("/movies", moviesRouter);
+router.use("/categories", categoriesRouter);
+router.use("/genres", genresRouter);
+
+export default router;

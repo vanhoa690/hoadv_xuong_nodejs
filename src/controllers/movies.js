@@ -1,4 +1,4 @@
-import Movie from "../models/MovieModel.js";
+import Movie from "../models/MovieModel";
 
 class MoviesController {
   // GET /movies

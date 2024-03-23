@@ -1,7 +1,7 @@
-import express from "express";
-import GenresController from "../controllers/genres.js";
+import { Router } from "express";
+import GenresController from "../controllers/genres";
 
-const genresRouter = express.Router();
+const genresRouter = Router();
 
 const genresController = new GenresController();
 

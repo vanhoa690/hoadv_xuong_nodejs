@@ -1,7 +1,7 @@
-import express from "express";
-import CategoriesController from "../controllers/categories.js";
+import { Router } from "express";
+import CategoriesController from "../controllers/categories";
 
-const categoriesRouter = express.Router();
+const categoriesRouter = Router();
 
 const categoriesController = new CategoriesController();
 
