@@ -4,7 +4,10 @@ class MoviesController {
   // GET /movies
   async getAllMovies(req, res) {
     try {
-      const movies = await Movie.find().populate(["category", "genres"]);
+      const movies = await Movie.find().populate([
+        "category",
+        "genres",
+      ]);
       res.status(200).json({
         message: "Get All Movies Done",
         data: movies,
@@ -40,7 +43,8 @@ class MoviesController {
   async createMovie(req, res) {
     // req.body
     // const newMovie = new Movie(req.body);
-    const saveMovie = await Movie.create(req.body);
+
+    const saveMovie = await Movie.create({ ...req.body, user: res.locals.id });
     res.status(201).json({
       message: "Create Movie Successfull",
       data: saveMovie,

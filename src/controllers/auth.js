@@ -2,10 +2,10 @@ import User from "../models/UserModel";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { registerValidator, loginValidator } from "../validations/auth";
-
 class AuthController {
   async register(req, res) {
     try {
+      // user_id
       //B1: validate: email, password, username
       const { email, username, avatar, password } = req.body;
       const { error } = registerValidator.validate(req.body);
@@ -67,7 +67,7 @@ class AuthController {
       });
     }
     // ma hoa token
-    const token = jwt.sign({ id: checkUser._id }, "khoa-bi-mat", {
+    const token = jwt.sign({ id: checkUser._id }, process.env.SECRET_KEY, {
       expiresIn: "1d",
     });
     // res
