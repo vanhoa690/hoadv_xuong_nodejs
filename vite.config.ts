@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     ...VitePluginNode({
       adapter: "express",
-      appPath: "./src/server.js",
+      appPath: "./src/server.ts",
       exportName: "viteNodeApp",
       initAppOnBoot: false,
       tsCompiler: "esbuild",

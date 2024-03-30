@@ -1,9 +1,9 @@
-import express from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
 import router from "./routes";
 import connectMongoDB from "./config/dbconfig";
 dotenv.config();
-const app = express();
+const app: Express = express();
 app.use(
   express.urlencoded({
     extended: true,

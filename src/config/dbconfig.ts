@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export default async function connectMongoDB(dbUrl) {
+export default async function connectMongoDB(dbUrl: string) {
   try {
     //mongodb://127.0.0.1:27017/db_name
     await mongoose.connect(dbUrl);

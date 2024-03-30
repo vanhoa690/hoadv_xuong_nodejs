@@ -1,13 +1,12 @@
+import { Request, Response } from "express";
+
 import Movie from "../models/MovieModel";
 
 class MoviesController {
   // GET /movies
-  async getAllMovies(req, res) {
+  async getAllMovies(req: Request, res: Response) {
     try {
-      const movies = await Movie.find().populate([
-        "category",
-        "genres",
-      ]);
+      const movies = await Movie.find().populate(["category", "genres"]);
       res.status(200).json({
         message: "Get All Movies Done",
         data: movies,
@@ -19,7 +18,7 @@ class MoviesController {
     }
   }
   // GET /movies/:id
-  async getMovieDetail(req, res) {
+  async getMovieDetail(req: Request, res: Response) {
     try {
       const movie = await Movie.findById(req.params.id)
         .populate("category")
@@ -40,7 +39,7 @@ class MoviesController {
     }
   }
   // POST /movies
-  async createMovie(req, res) {
+  async createMovie(req: Request, res: Response) {
     // req.body
     // const newMovie = new Movie(req.body);
 
@@ -51,7 +50,7 @@ class MoviesController {
     });
   }
   // PUT /movies/:id
-  async updateMovie(req, res) {
+  async updateMovie(req: Request, res: Response) {
     try {
       const movie = await Movie.findByIdAndUpdate(req.params.id, req.body);
       if (!movie) {
@@ -71,7 +70,7 @@ class MoviesController {
     }
   }
   // DELETE /movies/:id
-  async deleteMovie(req, res) {
+  async deleteMovie(req: Request, res: Response) {
     try {
       const movie = await Movie.findByIdAndDelete(req.params.id);
       if (!movie) {
