@@ -33,8 +33,13 @@ class CategoriesController {
     }
   }
   async creatCategory(req, res) {
+    // luu anh, title, desc
+    console.log(req.file, req.body);
     try {
-      const category = await Category.create(req.body);
+      const category = await Category.create({
+        ...req.body,
+        imageUrl: req.file.path,
+      });
       res.status(200).json({
         message: "Create Done",
         data: category,
