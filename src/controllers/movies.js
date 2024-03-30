@@ -4,7 +4,7 @@ class MoviesController {
   // GET /movies
   async getAllMovies(req, res) {
     try {
-      const movies = await Movie.find().populate(["category", "genres"]);
+      const movies = await Movie.find().populate('category');
       res.status(200).json({
         message: "Get All Movies Done",
         data: movies,
@@ -36,6 +36,7 @@ class MoviesController {
   }
   // POST /movies
   async createMovie(req, res) {
+    console.log('a',req.file);
     const { error } = movieValidator.validate(req.body);
     if (error) {
       console.log(error);
