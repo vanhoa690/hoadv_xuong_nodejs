@@ -1,13 +1,10 @@
 import Movie from "../models/MovieModel";
-
+import ApiError from "../utils/ApiError";
 class MoviesController {
   // GET /movies
   async getAllMovies(req, res) {
     try {
-      const movies = await Movie.find().populate([
-        "category",
-        "genres",
-      ]);
+      const movies = await Movie.find().populate(["category", "genres"]);
       res.status(200).json({
         message: "Get All Movies Done",
         data: movies,
@@ -19,24 +16,26 @@ class MoviesController {
     }
   }
   // GET /movies/:id
-  async getMovieDetail(req, res) {
+  async getMovieDetail(req, res, next) {
     try {
       const movie = await Movie.findById(req.params.id)
         .populate("category")
         .populate("genres");
       if (!movie) {
-        return res.status(404).json({
-          message: "Movie Not Found",
-        });
+        throw new ApiError(404, "Movie Not Found");
+        // return res.status(404).json({
+        //   message: "Movie Not Found",
+        // });
       }
       res.status(200).json({
         message: "Get Movie Detail Done",
         data: movie,
       });
     } catch (error) {
-      res.status(400).json({
-        message: error.message,
-      });
+      // res.status(400).json({
+      //   message: error.message,
+      // });
+      next(error);
     }
   }
   // POST /movies
