@@ -1,37 +1,32 @@
+import { StatusCodes } from "http-status-codes";
 import { cloudinary } from "../config/cloudinaryConfig";
+import ApiError from "../utils/ApiError";
 
 class ImageContorller {
-  uploadSingleImage(req, res) {
+  uploadSingleImage(req, res, next) {
     try {
-      console.log(req.file);
-      if (!req.file) {
-        throw new Error("No File Upload222");
-      }
-      res.status(200).json({
+      if (!req.file) throw new ApiError(404, "No File Upload");
+
+      res.status(StatusCodes.OK).json({
         message: "Upload Ok",
         imageUrl: req.file.path,
       });
     } catch (error) {
-      res.status(400).json({
-        message: error.message,
-      });
+      next(error);
     }
   }
-  async deleteImage(req, res) {
+  async deleteImage(req, res, next) {
     try {
       const { result } = await cloudinary.uploader.destroy(
         `${process.env.FOLDER_NAME}/${req.params.id}`
       );
-      if (result !== "ok") {
-        throw Error(result);
-      }
-      res.status(200).json({
+      if (result !== "ok") throw new ApiError(404, "Delete Image Failed");
+
+      res.status(StatusCodes.OK).json({
         message: "Delete Ok",
       });
     } catch (error) {
-      res.status(400).json({
-        message: error.message,
-      });
+      next(error);
     }
   }
 }

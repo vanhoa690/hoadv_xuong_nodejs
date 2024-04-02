@@ -8,7 +8,7 @@ const registerValidator = Joi.object({
   email: Joi.string().email().messages({
     "string.email": "Ko dung dinh dang email",
   }),
-  password: Joi.string(),
+  password: Joi.string().required,
   avatar: Joi.string(),
   role: Joi.string(),
 }).options({
