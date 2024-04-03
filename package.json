@@ -4,6 +4,9 @@
   "description": "",
   "main": "src/server.js",
   "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "nodemon --inspect index.js",
     "dev": "nodemon index.js",
