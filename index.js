@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
-import router from "./routes/index.js";
-import connectMongoDB from "./config/dbconfig.js";
-import errorHandler from "./middlewares/errorHandler.js";
+import router from "./src/routes/index.js";
+import connectMongoDB from "./src/config/dbconfig.js";
+import errorHandler from "./src/middlewares/errorHandler.js";
 dotenv.config();
 const app = express();
 app.use(
