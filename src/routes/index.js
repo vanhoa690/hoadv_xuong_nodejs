@@ -1,5 +1,4 @@
-// import { Router } from "express";
-const { Router } = require("express");
+import { Router } from "express";
 
 // import moviesRouter from "./movies";
 // import categoriesRouter from "./categories";
@@ -19,4 +18,4 @@ router.get("/", (req, res) => {
 // router.use("/genres", genresRouter);
 // router.use("/images", imagesRouter);
 
-module.exports = router;
+export default router;
