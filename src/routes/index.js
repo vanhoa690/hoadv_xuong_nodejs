@@ -9,7 +9,7 @@ import categoriesRouter from "./categories.js";
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.send("Home Update");
+  res.send("Home Update Ip");
 });
 
 // router.use("/auth", authRouter);
