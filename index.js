@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
-// const routes = require("./routes");
-import router from "./src/routes/index.js";
+const router = require("./src/routes/index.js");
+// import router from "./src/routes/index.js";
 // import connectMongoDB from "./src/config/dbconfig.js";
 // import errorHandler from "./src/middlewares/errorHandler.js";
 dotenv.config();
