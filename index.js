@@ -1,24 +1,15 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const router = require("./src/routes/index.js");
-// import router from "./src/routes/index.js";
-// import connectMongoDB from "./src/config/dbconfig.js";
-// import errorHandler from "./src/middlewares/errorHandler.js";
-dotenv.config();
+const express = require('express');
+
 const app = express();
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-app.use(express.json());
 
-const port = process.env.PORT || 8000;
-// const dbUrl = process.env.DB_URI || "mongodb://127.0.0.1:27017/db_movies";
-// connectMongoDB(dbUrl);
+app.get('/', (req, res) => res.send('Home Page Route'));
 
-app.use("/", router);
+app.get('/about', (req, res) => res.send('About Page Route'));
 
-// app.use(errorHandler);
+app.get('/portfolio', (req, res) => res.send('Portfolio Page Route'));
 
-app.listen(port, () => console.log("Server is running with " + port));
+app.get('/contact', (req, res) => res.send('Contact Page Route'));
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log(`Server running on ${port}, http://localhost:${port}`));
