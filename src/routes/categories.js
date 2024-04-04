@@ -11,18 +11,15 @@ categoriesRouter.get("/", categoriesController.getAllCategories);
 categoriesRouter.get("/:id", categoriesController.getCategoryDetail);
 categoriesRouter.post(
   "/",
-  checkPermission,
   uploadImage.single("image"),
   categoriesController.createCategory
 );
 categoriesRouter.put(
   "/:id",
-  checkPermission,
   categoriesController.updateCategory
 );
 categoriesRouter.delete(
   "/:id",
-  checkPermission,
   categoriesController.deleteCategory
 );
 
