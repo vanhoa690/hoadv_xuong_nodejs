@@ -1,7 +1,7 @@
 import { Router } from "express";
-import CategoriesController from "../controllers/categories";
-import { uploadImage } from "../config/cloudinaryConfig";
-import { checkPermission } from "../middlewares/checkPermision";
+import CategoriesController from "../controllers/categories.js";
+import { uploadImage } from "../config/cloudinaryConfig.js";
+import { checkPermission } from "../middlewares/checkPermision.js";
 
 const categoriesRouter = Router();
 

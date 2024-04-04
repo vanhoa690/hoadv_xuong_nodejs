@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
-import Movie from "../models/MovieModel";
-import ApiError from "../utils/ApiError";
+import Movie from "../models/MovieModel.js";
+import ApiError from "../utils/ApiError.js";
 
 class MoviesController {
   // GET /movies

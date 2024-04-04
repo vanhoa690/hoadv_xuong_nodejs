@@ -1,6 +1,6 @@
 import { Router } from "express";
-// import moviesRouter from "./movies";
-// import categoriesRouter from "./categories";
+// import moviesRouter from "./movies.js";
+import categoriesRouter from "./categories.js";
 // import genresRouter from "./genres";
 // import authRouter from "./auth";
 // import imagesRouter from "./images";
@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 
 // router.use("/auth", authRouter);
 // router.use("/movies", moviesRouter);
-// router.use("/categories", categoriesRouter);
+router.use("/categories", categoriesRouter);
 // router.use("/genres", genresRouter);
 // router.use("/images", imagesRouter);
 
