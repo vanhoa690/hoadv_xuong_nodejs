@@ -8,8 +8,8 @@ const genresController = new GenresController();
 
 genresRouter.get("/", genresController.getAllGenres);
 genresRouter.get("/:id", genresController.getGenreDetail);
-genresRouter.post("/", genresController.createGenre);
-genresRouter.put("/:id", genresController.updateGenre);
-genresRouter.delete("/:id", genresController.deleteGenre);
+genresRouter.post("/", checkPermission, genresController.createGenre);
+genresRouter.put("/:id", checkPermission, genresController.updateGenre);
+genresRouter.delete("/:id", checkPermission, genresController.deleteGenre);
 
 export default genresRouter;

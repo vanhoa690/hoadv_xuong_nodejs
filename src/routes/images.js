@@ -1,7 +1,7 @@
 import { Router } from "express";
-import ImageContorller from "../controllers/images";
-import { uploadImage } from "../config/cloudinaryConfig";
-import { checkPermission } from "../middlewares/checkPermision";
+import ImageContorller from "../controllers/images.js";
+import { uploadImage } from "../config/cloudinaryConfig.js";
+import { checkPermission } from "../middlewares/checkPermision.js";
 
 const imagesRouter = Router();
 const imageContorller = new ImageContorller();

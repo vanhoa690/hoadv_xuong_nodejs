@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
-import { cloudinary } from "../config/cloudinaryConfig";
-import ApiError from "../utils/ApiError";
+import { cloudinary } from "../config/cloudinaryConfig.js";
+import ApiError from "../utils/ApiError.js";
 
 class ImageContorller {
   uploadSingleImage(req, res, next) {
