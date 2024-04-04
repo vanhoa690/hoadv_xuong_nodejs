@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
-import Genre from "../models/GenreModel";
-import ApiError from "../utils/ApiError";
+import Genre from "../models/GenreModel.js";
+import ApiError from "../utils/ApiError.js";
 
 class GenresController {
   // GET /genres
