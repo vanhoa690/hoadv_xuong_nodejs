@@ -2,8 +2,8 @@ import { Router } from "express";
 import moviesRouter from "./movies.js";
 import categoriesRouter from "./categories.js";
 import genresRouter from "./genres.js";
-import authRouter from "./auths.js";
-import imagesRouter from "./imagess.js";
+import authRouter from "./auth.js";
+import imagesRouter from "./images.js";
 
 const router = Router();
 

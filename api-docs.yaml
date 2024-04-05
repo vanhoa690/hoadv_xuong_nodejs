@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: Swagger Movies App - OpenAPI 3.0
+  description: |-
+    Api NodeJs Movies App - Hoadv
+  contact:
+    email: hoadv21@fpt.edu.vn
+  version: 1.0.11
+servers:
+  - url: http://localhost:8000
+tags:
+  - name: auth
+    description: Authentication
+  - name: genres
+    description: Genres
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Auth Register
+      description: Register User
+      operationId: createUser
+      requestBody:
+        description: Register New User
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterBody"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Register User Done
+                  data:
+                    $ref: "#/components/schemas/RegisterResponse"
+        "400":
+          description: Bad Request
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Auth Login
+      description: Login User
+      operationId: loginUser
+      requestBody:
+        description: Login User
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginBody"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Login successful
+                  data:
+                    $ref: "#/components/schemas/LoginResponse"
+        "400":
+          description: Bad Request
+  /genres:
+    post:
+      tags:
+        - genres
+      summary: Create New Genre
+      description: Create New Genre
+      operationId: createGenre
+      security:
+        - BearAuth: []
+      requestBody:
+        description: Create New Genre
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenreBody"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Create successful
+                  data:
+                    $ref: "#/components/schemas/GenreResponse"
+        "400":
+          description: Bad Request
+
+components:
+  schemas:
+    RegisterBody:
+      type: object
+      properties:
+        username:
+          type: string
+          example: hoadv21
+        email:
+          type: string
+          example: hoadv21@gmail.com
+        password:
+          type: string
+          example: password
+    RegisterResponse:
+      type: object
+      properties:
+        username:
+          type: string
+          example: hoadv21
+        email:
+          type: string
+          example: hoadv21@gmail.com
+        _id:
+          type: string
+          format: MongoId
+          example: 660fac49f6474c33284bd5a3
+        createdAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+        updatedAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+    LoginBody:
+      type: object
+      properties:
+        email:
+          type: string
+          example: hoadv21@gmail.com
+        password:
+          type: string
+          example: 123456
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGZhYzQ5ZjY0NzRjMzMyODRiZDVhMyIsImlhdCI6MTcxMjMwNDQ5MywiZXhwIjoxNzEyMzkwODkzfQ.cKBHABEqqUuducHzNZUOrkgqUiKyfq0zE_55LD-gWqk
+        username:
+          type: string
+          example: hoadv21
+        email:
+          type: string
+          example: hoadv21@gmail.com
+        _id:
+          type: string
+          format: MongoId
+          example: 660fac49f6474c33284bd5a3
+        createdAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+        updatedAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+    GenreBody:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Tam Ly
+        description:
+          type: string
+          example: Phim Tam Ly - Tinh Cam
+    GenreResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Tam Ly
+        description:
+          type: string
+          example: Phim Tam Ly - Tinh Cam
+        _id:
+          type: string
+          format: MongoId
+          example: 660fac49f6474c33284bd5a3
+        createdAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+        updatedAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+  securitySchemes:
+    BearAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
