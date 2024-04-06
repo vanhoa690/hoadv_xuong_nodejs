@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: Movies App Update 2222 - OpenAPI 3.0
+  description: |-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.
+  termsOfService: http://swagger.io/terms/
+  version: 1.0.11
+servers:
+  - url: http://localhost:8000
+  - url: https://hoadv-xuong-nodejs.onrender.com/
+tags:
+  - name: auth
+    description: Authentication
+  - name: genres
+    description: Genres
+paths:
+  /genres:
+    post:
+      tags:
+        - genres
+      summary: Genres
+      description: Genres
+      operationId: createGenre
+      security:
+        - BearAuth: []
+      requestBody:
+        description: Genre Body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenreBody"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenreResponse"
+
+components:
+  schemas:
+    LoginBody:
+      type: object
+      properties:
+        email:
+          type: string
+          example: hoadv21@gmail.com
+        password:
+          type: string
+          example: 123456
+    LoginResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Create ok
+        user:
+          type: object
+          properties:
+            email:
+              type: string
+              example: hoadv211@gmail.com
+            username:
+              type: string
+              example: hoadv21
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGZhYzQ5ZjY0NzRjMzMyODRiZDVhMyIsImlhdCI6MTcxMjM5MDI4MSwiZXhwIjoxNzEyNDc2NjgxfQ.zMg0OZgpaDiDUIxPSuPsTj0dbPefnntDljN60OnVLck
+    GenreBody:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Phim Tam Ly
+        description:
+          type: string
+          example: Phim Tam Ly - Tinh Cam
+    GenreResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Login ok
+        data:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Phim Tam Ly
+            description:
+              type: string
+              example: Phim Tam Ly - Tinh Cam
+            _id:
+              type: string
+              format: MongoId
+              example: 661103fe9b1025f1796c15ae
+            createdAt: 
+              type: string
+              format: ISO8601
+              example: 2024-04-06T08:12:46.940Z
+
+  securitySchemes:
+    BearAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
