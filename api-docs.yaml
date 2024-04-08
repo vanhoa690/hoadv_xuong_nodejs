@@ -1,45 +1,141 @@
 openapi: 3.0.3
 info:
-  title: Movies App Update 2024 - OpenAPI 3.0
+  title: Swagger Movies App 2024 - OpenAPI 3.0
   description: |-
-    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.
-  termsOfService: http://swagger.io/terms/
+    Api NodeJs Movies App - Hoadv
+  contact:
+    email: hoadv21@fpt.edu.vn
   version: 1.0.11
 servers:
   - url: http://localhost:8000
-  - url: https://hoadv-xuong-nodejs.onrender.com/
 tags:
   - name: auth
     description: Authentication
   - name: genres
     description: Genres
 paths:
-  /genres:
+  /auth/register:
     post:
       tags:
-        - genres
-      summary: Genres
-      description: Genres
-      operationId: createGenre
-      security:
-        - BearAuth: []
+        - auth
+      summary: Auth Register
+      description: Register User
+      operationId: createUser
       requestBody:
-        description: Genre Body
+        description: Register New User
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GenreBody"
-        required: true
+              $ref: "#/components/schemas/RegisterBody"
       responses:
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenreResponse"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Register User Done
+                  data:
+                    $ref: "#/components/schemas/RegisterResponse"
+        "400":
+          description: Bad Request
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Auth Login
+      description: Login User
+      operationId: loginUser
+      requestBody:
+        description: Login User
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginBody"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Login successful
+                  data:
+                    $ref: "#/components/schemas/LoginResponse"
+        "400":
+          description: Bad Request
+  /genres:
+    post:
+      tags:
+        - genres
+      summary: Create New Genre
+      description: Create New Genre
+      operationId: createGenre
+      security:
+        - BearAuth: []
+      requestBody:
+        description: Create New Genre
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenreBody"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Create successful
+                  data:
+                    $ref: "#/components/schemas/GenreResponse"
+        "400":
+          description: Bad Request
 
 components:
   schemas:
+    RegisterBody:
+      type: object
+      properties:
+        username:
+          type: string
+          example: hoadv21
+        email:
+          type: string
+          example: hoadv21@gmail.com
+        password:
+          type: string
+          example: password
+    RegisterResponse:
+      type: object
+      properties:
+        username:
+          type: string
+          example: hoadv21
+        email:
+          type: string
+          example: hoadv21@gmail.com
+        _id:
+          type: string
+          format: MongoId
+          example: 660fac49f6474c33284bd5a3
+        createdAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+        updatedAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
     LoginBody:
       type: object
       properties:
@@ -52,54 +148,57 @@ components:
     LoginResponse:
       type: object
       properties:
-        message:
-          type: string
-          example: Create ok
-        user:
-          type: object
-          properties:
-            email:
-              type: string
-              example: hoadv211@gmail.com
-            username:
-              type: string
-              example: hoadv21
         token:
           type: string
-          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGZhYzQ5ZjY0NzRjMzMyODRiZDVhMyIsImlhdCI6MTcxMjM5MDI4MSwiZXhwIjoxNzEyNDc2NjgxfQ.zMg0OZgpaDiDUIxPSuPsTj0dbPefnntDljN60OnVLck
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGZhYzQ5ZjY0NzRjMzMyODRiZDVhMyIsImlhdCI6MTcxMjMwNDQ5MywiZXhwIjoxNzEyMzkwODkzfQ.cKBHABEqqUuducHzNZUOrkgqUiKyfq0zE_55LD-gWqk
+        username:
+          type: string
+          example: hoadv21
+        email:
+          type: string
+          example: hoadv21@gmail.com
+        _id:
+          type: string
+          format: MongoId
+          example: 660fac49f6474c33284bd5a3
+        createdAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+        updatedAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
     GenreBody:
       type: object
       properties:
         name:
           type: string
-          example: Phim Tam Ly
+          example: Tam Ly
         description:
           type: string
           example: Phim Tam Ly - Tinh Cam
     GenreResponse:
       type: object
       properties:
-        message:
+        name:
           type: string
-          example: Login ok
-        data:
-          type: object
-          properties:
-            name:
-              type: string
-              example: Phim Tam Ly
-            description:
-              type: string
-              example: Phim Tam Ly - Tinh Cam
-            _id:
-              type: string
-              format: MongoId
-              example: 661103fe9b1025f1796c15ae
-            createdAt: 
-              type: string
-              format: ISO8601
-              example: 2024-04-06T08:12:46.940Z
-
+          example: Tam Ly
+        description:
+          type: string
+          example: Phim Tam Ly - Tinh Cam
+        _id:
+          type: string
+          format: MongoId
+          example: 660fac49f6474c33284bd5a3
+        createdAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
+        updatedAt:
+          type: string
+          format: ISO8601
+          example: 2024-04-05T07:46:17.778Z
   securitySchemes:
     BearAuth:
       type: http
