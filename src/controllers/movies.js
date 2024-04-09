@@ -6,10 +6,30 @@ class MoviesController {
   // GET /movies
   async getAllMovies(req, res, next) {
     try {
-      const movies = await Movie.find().populate(["category", "genres"]);
+      const page = parseInt(req.query.page) - 1 || 0;
+      const limit = parseInt(req.query.limit) || 6;
+      const search = req.query.search || "";
+
+      const movies = await Movie.find({
+        name: { $regex: String(search), $options: "i" },
+      })
+        .populate(["category", "genres"])
+        .skip(page * limit)
+        .limit(limit);
+      // console.log(movies);
+      const totalPage = Math.ceil(
+        (await Movie.countDocuments({
+          name: { $regex: String(search), $options: "i" },
+        })) / limit
+      );
+      console.log(totalPage);
+
       res.status(StatusCodes.OK).json({
         message: "Get All Movies Done",
         data: movies,
+        page: page + 1,
+        limit,
+        totalPage,
       });
     } catch (error) {
       next(error);
