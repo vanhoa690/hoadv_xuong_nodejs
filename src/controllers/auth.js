@@ -4,6 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import User from "../models/UserModel";
 import { registerValidator, loginValidator } from "../validations/auth";
 import ApiError from "../utils/ApiError";
+import { getUserByEmail } from "../services/user";
 
 class AuthController {
   async register(req, res, next) {
@@ -16,7 +17,7 @@ class AuthController {
         throw new ApiError(StatusCodes.BAD_REQUEST, errors);
       }
       // b2: validate email exitsing
-      const emailExist = await User.findOne({ email });
+      const emailExist = await getUserByEmail(email);
       if (emailExist)
         throw new ApiError(StatusCodes.BAD_REQUEST, "Email da duoc dang ky");
       // b3 ma hoa password
@@ -49,7 +50,7 @@ class AuthController {
         throw new ApiError(StatusCodes.BAD_REQUEST, errors);
       }
       // check email xem co trong db
-      const checkUser = await User.findOne({ email });
+      const checkUser = await getUserByEmail(email);
       if (!checkUser)
         throw new ApiError(StatusCodes.BAD_REQUEST, "Tai khoan ko hop le");
 
